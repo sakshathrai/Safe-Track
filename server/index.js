@@ -2,9 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 const JWT_SECRETE = process.env.JWT_SECRETE;
 mongoose.connect(process.env.MONGO_SECRETE_URI);
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const userSchema = mongoose.Schema({
@@ -50,12 +52,41 @@ async function getUserIdByToken(token) {
   }
 }
 
+async function getUserByEmail(userEmail) {
+  if (userEmail) {
+    const someUser = await mongoose.model("user").findOne({ userEmail });
+    return someUser;
+  } else {
+    return false;
+  }
+}
+
 app.post("/api/signup", async (req, res) => {
+  if (
+    !(
+      req.body.userName &&
+      req.body.userEmail &&
+      req.body.userPassword &&
+      req.body.userCountry &&
+      req.body.userNumber
+    )
+  ) {
+    return res.json({
+      success: false,
+      fetchError: "Invalid Credential",
+    });
+  }
+  const userEmail = req.body.userEmail;
+  const someUser = await getUserByEmail(userEmail);
+  if (someUser) {
+    return res.json({ success: false, fetchError: "Account already EXists" });
+  }
   const user = new userModel({
     ...req.body,
   });
 
   const response = await user.save();
+
   const dataForJwtSign = {
     user: {
       id: response._id.toString(),
@@ -66,11 +97,17 @@ app.post("/api/signup", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.email;
-  const user = await mongoose.model("user").findOne({ userEmail: email });
-  if (!user) {
-    res.send({ success: false });
+  const userEmail = req.body.userEmail;
+  const userPassword = req.body.userPassword;
+  if (!(userEmail && userPassword)) {
+    return res.json({
+      success: false,
+      fetchError: "Invalid Credential",
+    });
+  }
+  const user = await getUserByEmail(userEmail);
+  if (!user || user.userPassword != userPassword) {
+    res.send({ success: false, fetchError: "Invalid Credential" });
   } else {
     const authToken = jwt.sign({ user: { id: user._id } }, JWT_SECRETE);
     return res.send({ authToken, success: true });
