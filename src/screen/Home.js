@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import "../css/home.css";
+import { useNavigate } from "react-router-dom";
 function getLevel() {
   return localStorage.getItem("level");
 }
 function Home() {
+  const navigate = useNavigate();
   const [level, setLevel] = useState(getLevel);
   const services = {
     1: ["upi", "num", "acc", "recharge", "scan"],
@@ -37,8 +39,9 @@ function Home() {
     <div className="home-container">
       <div className="home-header">
         <button>Account Balance</button>
-        <button>Custom Level</button>
+        <button onClick={() => navigate("/custom-level")}>Custom Level</button>
         <button>Add Card</button>
+        <button>Name</button>
       </div>
       {showService.map((v) => {
         return (

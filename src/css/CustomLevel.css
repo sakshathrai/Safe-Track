@@ -1,0 +1,6 @@
+.level-buttons {
+  display: flex;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}

@@ -6,6 +6,7 @@ import Login from "./screen/Login";
 import SignUp from "./screen/SignUp";
 import Home from "./screen/Home";
 import LevelPick from "./screen/LevelPick";
+import CustomLevel from "./screen/CustomLevel";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/pickLevel" element={<LevelPick />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/card-pay" element={<CardPay />}></Route>
+        <Route exact path="/custom-level" element={<CustomLevel />}></Route>
       </Routes>
     </BrowserRouter>
   );
