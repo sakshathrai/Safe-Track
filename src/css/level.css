@@ -1,0 +1,22 @@
+button.skip-button {
+  width: 100px;
+  background-color: transparent;
+  color: #6b43ff;
+}
+
+.level-buttons {
+  display: flex;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+.level-pick-container {
+  min-height: 100vh;
+}
+
+.level-1 {
+  border: 1px solid transparent;
+}
+.selected-level {
+  border-color: greenyellow;
+}

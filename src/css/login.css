@@ -93,9 +93,8 @@ body {
   color: #401b3d;
   display: flex;
   flex: 1;
-
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   background: linear-gradient(
     92.15deg,

@@ -35,7 +35,7 @@ function SignUp() {
 
     if (responseJSON.success) {
       localStorage.setItem("safeToken", responseJSON.authToken);
-      navigate("/home");
+      navigate("/pickLevel");
     } else {
       setError(responseJSON.fethError || responseJSON.serverError);
     }
