@@ -1,14 +1,34 @@
 import React, { useState } from "react";
 import "../css/password.css";
 import logo from "../image/logo.jpg";
+const FETCH_BASE_URL = process.env.REACT_APP_FETCH_BASE_URL;
+
 function Password() {
+  async function VerifyPin() {
+    if (pin[3] === -1) {
+      setError("Enter Correct PIN");
+      return;
+    }
+    const response = await fetch(`${FETCH_BASE_URL}/api/verifypin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userPin: pin.join(""),
+      }),
+    });
+    const responsJSON = await response.json();
+    return responsJSON.success;
+  }
   const [pin, setPin] = useState([-1, -1, -1, -1]);
   const [index, setIndex] = useState(-1);
-
+  const [error, setError] = useState("");
   return (
     <div className="security">
       <div className="main-container">
         <div className="logo-container">
+          <div className="error">{error}</div>
           <div className="logo">
             <img src={logo} alt="Logo" />
           </div>
@@ -57,7 +77,7 @@ function Password() {
           >
             delete
           </button>
-          <button className="keypad-btn" id="verifyBtn">
+          <button className="keypad-btn" id="verifyBtn" onClick={VerifyPin}>
             verify
           </button>
         </div>
