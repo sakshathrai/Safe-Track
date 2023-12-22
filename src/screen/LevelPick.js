@@ -21,7 +21,7 @@ function LevelPick() {
         }}
       >
         <div class="card-image">
-          <img src={img1} alt="Image 1" />
+          <img src={img1} alt="I1" />
         </div>
         <div class="card-content">
           <h3>
@@ -41,7 +41,7 @@ function LevelPick() {
         }}
       >
         <div class="card-image">
-          <img src={img2} alt="Image 2" />
+          <img src={img2} alt="I2" />
         </div>
         <div class="card-content">
           <h3>Level 2</h3>
@@ -58,7 +58,7 @@ function LevelPick() {
         }}
       >
         <div class="card-image">
-          <img src={img3} alt="Image 3" />
+          <img src={img3} alt="I3" />
         </div>
         <div class="card-content">
           <h3>Level 3 </h3>
