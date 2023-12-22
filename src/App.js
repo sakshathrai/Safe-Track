@@ -7,20 +7,22 @@ import SignUp from "./screen/SignUp";
 import Home from "./screen/Home";
 import LevelPick from "./screen/LevelPick";
 import CustomLevel from "./screen/CustomLevel";
+import Landing from "./screen/Landing";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route exact path="/login" element={<Login />}></Route>
-        <Route exact path="/signup" element={<SignUp />}></Route>
-        <Route exact path="/pin" element={<Password />}></Route>
-        <Route exact path="/pickLevel" element={<LevelPick />}></Route>
-        <Route exact path="/home" element={<Home />}></Route>
-        <Route exact path="/card-pay" element={<CardPay />}></Route>
-        <Route exact path="/custom-level" element={<CustomLevel />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/pin" element={<Password />} />
+      <Route path="/pickLevel" element={<LevelPick />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/card-pay" element={<CardPay />} />
+      <Route path="/custom-level" element={<CustomLevel />} />
+    </Routes>
+  </BrowserRouter>
   );
 }
 
