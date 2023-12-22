@@ -6,6 +6,7 @@ import logo from "../image/logo.jpg";
 function Landing() {
 
   return (
+    
    
   <div>
     <header className="header">
