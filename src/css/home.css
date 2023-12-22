@@ -74,7 +74,13 @@ i {
 
 .home-header {
   display: flex;
-  gap: 20px;
+  gap: 25px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+select {
+  height: 20px !important;
 }
 .home-header > button {
   width: 10%;

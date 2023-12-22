@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/home.css";
 import { useNavigate } from "react-router-dom";
+import ChatBot from "../component/Chat";
 function getLevel() {
   return localStorage.getItem("level");
 }
@@ -18,10 +19,14 @@ function getCustom() {
   }
 }
 function Home() {
+  const [activechat, setActiveChat] = useState(false);
   const navigate = useNavigate();
   const [level, setLevel] = useState(getLevel);
   const [services, setServices] = useState(getCustom);
   const [showService, setShowServices] = useState(services[level]);
+  function changeState() {
+    setActiveChat(false);
+  }
   const Headings = {
     upi: "Pay by UPI/QR",
     num: "Pay to Contacts",
@@ -58,7 +63,7 @@ function Home() {
         <button>Account Balance</button>
         <button onClick={() => navigate("/custom-level")}>Custom Level</button>
         <button>Add Card</button>
-        <button>Name</button>
+        <button>{localStorage.getItem("userName")}</button>
         <button onClick={() => navigate("/pickLevel")}>Change Level</button>
         <select
           onChange={(e) => {
@@ -88,6 +93,10 @@ function Home() {
             </div>
           );
         })}
+      </div>
+      <div className="fixed-chat-container">
+        <button onClick={() => setActiveChat(!activechat)}>chat</button>
+        {activechat ? <ChatBot fc={changeState} /> : ""}
       </div>
     </div>
   );
