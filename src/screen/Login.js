@@ -27,6 +27,7 @@ function Login() {
 
     if (responseJSON.success) {
       localStorage.setItem("safeToken", responseJSON.authToken);
+      localStorage.setItem("userName", responseJSON.userName);
       navigate("/verify");
     } else {
       setErrorMsge(responseJSON.fethError || responseJSON.serverError);

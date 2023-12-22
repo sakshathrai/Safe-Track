@@ -35,6 +35,7 @@ function SignUp() {
 
     if (responseJSON.success) {
       localStorage.setItem("safeToken", responseJSON.authToken);
+      localStorage.setItem("userName", responseJSON.userName);
       navigate("/setpin");
     } else {
       setError(responseJSON.fethError || responseJSON.serverError);

@@ -44,7 +44,7 @@ function Password({ endPoint }) {
           </div>
         </div>
 
-        <h1>Welcome to Safe Track</h1>
+        <h1 className="heading">Welcome to Safe Track</h1>
 
         <div className="pin-container">
           {pin.map((val, i) => {
