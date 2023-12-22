@@ -61,6 +61,12 @@ async function getUserByEmail(userEmail) {
   }
 }
 
+async function getUserById(userId) {
+  if (!userId) return false;
+  const response = await mongoose.model("user").findById(userId);
+  return response;
+}
+
 app.post("/api/signup", async (req, res) => {
   if (
     !(
@@ -110,17 +116,47 @@ app.post("/api/login", async (req, res) => {
   if (!user || user.userPassword != userPassword) {
     res.send({ success: false, fetchError: "Invalid Credential" });
   } else {
-    const authToken = jwt.sign({ user: { id: user._id } }, JWT_SECRETE);
-    return res.send({ authToken, success: true });
+    const authToken = jwt.sign(
+      { user: { id: user._id, name: user.userName } },
+      JWT_SECRETE
+    );
+    return res.send({ authToken, success: true, userName: user.userName });
   }
 });
 
-app.post("/api/setuppin", async (req, res) => {
-  res.send({ msg: await getUserIdByToken(req.body.token) });
+function authOnPost(req, res, next) {
+  const user = jwt.verify(req.headers.token, JWT_SECRETE);
+  if (!user) {
+    return res.send({ success: false, fetchError: "Invalid Token" });
+  }
+  req.body.userId = user.user.id;
+  req.body.userName = user.user.name;
+  next();
+}
+
+app.post("/api/setuppin", authOnPost, async (req, res) => {
+  const user = await getUserById(req.body.userId);
+  if (!user || req.body.userPin.length !== 4) {
+    return res.send({ success: false, fetchError: "Invalid Credential" });
+  }
+  user.userPin == req.body.userPin;
+  await user.save();
+  return res.send({ success: true });
 });
 
-app.post("/api/verifypin", (req, res) => {
-  res.send();
+app.post("/api/verifypin", authOnPost, async (req, res) => {
+  const user = await getUserById(req.body.userId);
+  if (!user) {
+    return res.send({ success: false, fetchError: "Invalid Credential" });
+  } else if (user && !user.userPin) {
+    return res.send({
+      success: false,
+      fetchError: "Set up The pin Fisrt",
+      route: "/setpin",
+    });
+  } else {
+    return res.send({ success: true });
+  }
 });
 
 app.get("/api/profile", (req, res) => {
@@ -128,6 +164,7 @@ app.get("/api/profile", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
+  console.log(err);
   res.status(500).send({ serverError: "Internal Server ERROR" });
 });
 const PORT = process.env.PORT || 5000;
