@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/CustomLevel.css";
+import { useNavigate } from "react-router-dom";
+function getCustom() {
+  return localStorage.getItem("custom");
+}
 function CustomLevel() {
-  const [services, setServices] = useState({
-    1: ["num", "recharge", "upi", "acc", "scan"],
-    2: ["Electricity", "Education", "credit", "water", "cylinder"],
-    3: ["Loan-repay", "donate", "postpaid", "Ticket", "flight"],
-  });
+  const navigate = useNavigate();
+  const [services, setServices] = useState(
+    (getCustom() && JSON.parse(getCustom())) || {
+      1: ["num", "recharge", "upi", "acc", "scan"],
+      2: ["Electricity", "Education", "credit", "water", "cylinder"],
+      3: ["Loan-repay", "donate", "postpaid", "Ticket", "flight"],
+    }
+  );
   const [selected, setSelected] = useState("");
   const Headings = {
     upi: "Pay by UPI/QR",
@@ -29,7 +36,6 @@ function CustomLevel() {
   function handleRemove(i, val) {
     services[i] = services[i].filter((v) => v != val);
     setServices({ ...services });
-    localStorage.setItem("custom", JSON.stringify(services));
     removed.push(val);
   }
 
@@ -96,8 +102,15 @@ function CustomLevel() {
         })}
       </div>
       <div className="level-buttons">
-        <button>Back</button>
-        <button>Save Changes</button>
+        <button onClick={() => navigate("/home")}>Back</button>
+        <button
+          onClick={() => {
+            localStorage.setItem("custom", JSON.stringify(services));
+            navigate("/home");
+          }}
+        >
+          Save Changes
+        </button>
       </div>
     </div>
   );

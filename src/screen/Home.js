@@ -4,14 +4,19 @@ import { useNavigate } from "react-router-dom";
 function getLevel() {
   return localStorage.getItem("level");
 }
+function getCustom() {
+  return localStorage.getItem("custom");
+}
 function Home() {
   const navigate = useNavigate();
   const [level, setLevel] = useState(getLevel);
-  const [services, setServices] = useState({
-    1: ["num", "recharge", "upi", "acc", "scan"],
-    2: ["Electricity", "Education", "credit", "water", "cylinder"],
-    3: ["Loan-repay", "donate", "postpaid", "Ticket", "Flight"],
-  });
+  const [services, setServices] = useState(
+    (getCustom() && JSON.parse(getCustom())) || {
+      1: ["num", "recharge", "upi", "acc", "scan"],
+      2: ["Electricity", "Education", "credit", "water", "cylinder"],
+      3: ["Loan-repay", "donate", "postpaid", "Ticket", "Flight"],
+    }
+  );
   const [showService, setShowServices] = useState(services[level]);
   const Headings = {
     upi: "Pay by UPI/QR",
@@ -30,14 +35,17 @@ function Home() {
     Ticket: "Movie ticket",
     flight: "Flight ticket",
   };
+
   useEffect(() => {
     setLevel(localStorage.getItem("level"));
     const customServices = localStorage.getItem("custom");
     if (customServices) {
       setServices(JSON.parse(customServices));
     }
+    console.log(services[level]);
     setShowServices(services[level]);
   }, []);
+
   return (
     <div className="home-container">
       <div className="home-header">
@@ -45,6 +53,16 @@ function Home() {
         <button onClick={() => navigate("/custom-level")}>Custom Level</button>
         <button>Add Card</button>
         <button>Name</button>
+        <select
+          onChange={(e) => {
+            console.log(level);
+            setLevel(e.target.value);
+          }}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
       </div>
       <div className="services-container">
         {showService.map((v) => {
