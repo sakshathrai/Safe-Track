@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/CustomLevel.css";
 import { useNavigate } from "react-router-dom";
+
 function getCustom() {
   return localStorage.getItem("custom");
 }
@@ -40,9 +41,10 @@ function CustomLevel() {
   }
 
   function handleAdd(i) {
-    if (selected) {
+    if (selected && selected != "") {
       services[i].push(selected);
       const newRemoved = removed.filter((v) => v != selected);
+      setSelected("");
       setRemoved([...newRemoved]);
     }
   }

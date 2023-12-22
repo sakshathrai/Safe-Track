@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import logo from "../image/logo.jpg";
 import heroImg from "../image/hero-img.png";
 function Landing() {
+  const navigate = useNavigate();
   return (
     <div>
       <header className="header">
@@ -33,14 +34,17 @@ function Landing() {
 
         <div className="header__title">
           <h1>
-            <span className="highlight">banking</span>
+            <span className="highlight">Banking </span>
             meets
             <br />
-            <span className="highlight">minimalist</span>
+            <span className="highlight">Minimalist </span>
           </h1>
           <h4>A simpler banking experience for a simpler life.</h4>
-          <button className="btn--text btn--scroll-to">
-            Learn more &DownArrow;
+          <button
+            className="btn--text btn--scroll-to"
+            onClick={() => navigate("/login")}
+          >
+            Learn more
           </button>
           <img
             src={heroImg}
@@ -202,99 +206,6 @@ function Landing() {
         </div>
       </section>
 
-      <section className="section" id="section--3">
-        <div className="section__title section__title--testimonials">
-          <h2 className="section__description">Not sure yet?</h2>
-          <h3 className="section__header">
-            Millions of Bankists are already making their lifes simpler.
-          </h3>
-        </div>
-
-        <div className="slider">
-          <div className="slide slide--1">
-            <div className="testimonial">
-              <h5 className="testimonial__header">
-                Best financial decision ever!
-              </h5>
-              <blockquote className="testimonial__text">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Accusantium quas quisquam non? Quas voluptate nulla minima
-                deleniti optio ullam nesciunt, numquam corporis et asperiores
-                laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus
-                id alias reiciendis, perferendis facere pariatur dolore veniam
-                autem esse non voluptatem saepe provident nihil molestiae.
-              </blockquote>
-              <address className="testimonial__author">
-                <img
-                  src="image/user-1.jpg"
-                  alt=""
-                  className="testimonial__photo"
-                />
-                <h6 className="testimonial__name">Aarav Lynn</h6>
-                <p className="testimonial__location">San Francisco, USA</p>
-              </address>
-            </div>
-          </div>
-
-          <div className="slide slide--2">
-            <div className="testimonial">
-              <h5 className="testimonial__header">
-                The last step to becoming a complete minimalist
-              </h5>
-              <blockquote className="testimonial__text">
-                Quisquam itaque deserunt ullam, quia ea repellendus provident,
-                ducimus neque ipsam modi voluptatibus doloremque, corrupti
-                laborum. Incidunt numquam perferendis veritatis neque
-                repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing
-                elit. Illo deserunt exercitationem deleniti.
-              </blockquote>
-              <address className="testimonial__author">
-                <img
-                  src="image/user-2.jpg"
-                  alt=""
-                  className="testimonial__photo"
-                />
-                <h6 className="testimonial__name">Miyah Miles</h6>
-                <p className="testimonial__location">London, UK</p>
-              </address>
-            </div>
-          </div>
-
-          <div className="slide slide--3">
-            <div className="testimonial">
-              <h5 className="testimonial__header">
-                Finally free from old-school banks
-              </h5>
-              <blockquote className="testimonial__text">
-                Debitis, nihil sit minus suscipit magni aperiam vel tenetur
-                incidunt commodi architecto numquam omnis nulla autem,
-                necessitatibus blanditiis modi similique quidem. Odio aliquam
-                culpa dicta beatae quod maiores ipsa minus consequatur error
-                sunt, deleniti saepe aliquid quos inventore sequi.
-                Necessitatibus id alias reiciendis, perferendis facere.
-              </blockquote>
-              <address className="testimonial__author">
-                <img
-                  src="image/user-3.jpg"
-                  alt=""
-                  className="testimonial__photo"
-                />
-                <h6 className="testimonial__name">Francisco Gomes</h6>
-                <p className="testimonial__location">Lisbon, Portugal</p>
-              </address>
-            </div>
-          </div>
-
-          {/* <div className="slide"><img src="image/img-1.jpg" alt="Photo 1" /></div>
-        <div className="slide"><img src="image/img-2.jpg" alt="Photo 2" /></div>
-        <div className="slide"><img src="image/img-3.jpg" alt="Photo 3" /></div>
-        <div className="slide"><img src="image/img-4.jpg" alt="Photo 4" /></div>  */}
-          <button className="slider__btn slider__btn--left">&larr;</button>
-          <button className="slider__btn slider__btn--right">&rarr;</button>
-          <div className="dots"></div>
-        </div>
-      </section>
-
       <section className="section section--sign-up">
         <div className="section__title">
           <h3 className="section__header">
@@ -345,18 +256,9 @@ function Landing() {
             </a>
           </li>
         </ul>
-        <img src="image/icon.png" alt="Logo" className="footer__logo" />
         <p className="footer__copyright">
-          &copy; Copyright by
-          <a
-            className="footer__link twitter-link"
-            target="_blank"
-            href="https://twitter.com/jonasschmedtman"
-          >
-            Jonas Schmedtmann
-          </a>
-          . Use for learning or your portfolio. Don't use to teach. Don't claim
-          as your own product.
+          &copy; Copyright by 4 BIT . Use for learning or your portfolio. Don't
+          use to teach. Don't claim as your own product.
         </p>
       </footer>
 

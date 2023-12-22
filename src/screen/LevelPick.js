@@ -4,7 +4,9 @@ import "../css/level.css";
 import img1 from "../image/one.png";
 import img2 from "../image/two.png";
 import img3 from "../image/three.png";
+import useSound from "use-sound";
 function LevelPick() {
+  const [playSound1] = useSound("../audio/advfeatues.mp3");
   const [level, setLevel] = useState(1);
   const navigate = useNavigate();
   useEffect(() => {
@@ -23,7 +25,7 @@ function LevelPick() {
         <div class="card-image">
           <img src={img1} alt="I1" />
         </div>
-        <div class="card-content">
+        <div class="card-content" onClick={playSound1}>
           <h3>
             <b>Level 1 </b>
           </h3>
