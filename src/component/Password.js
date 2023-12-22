@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import "../css/password.css";
 import logo from "../image/logo.jpg";
+import { useNavigate } from "react-router-dom";
 const FETCH_BASE_URL = process.env.REACT_APP_FETCH_BASE_URL;
 
-function Password() {
+function Password({ endPoint }) {
+  const navigate = useNavigate();
   async function VerifyPin() {
     if (pin[3] === -1) {
       setError("Enter Correct PIN");
       return;
     }
-    const response = await fetch(`${FETCH_BASE_URL}/api/verifypin`, {
+    const response = await fetch(`${FETCH_BASE_URL}/api/${endPoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        token: localStorage.getItem("safeToken"),
       },
       body: JSON.stringify({
         userPin: pin.join(""),
       }),
     });
     const responsJSON = await response.json();
-    return responsJSON.success;
+
+    if (responsJSON.success) {
+      navigate("/home");
+    } else if (responsJSON.route) {
+      navigate(responsJSON.route);
+    } else {
+      setError("Invalid Pin Code");
+    }
   }
   const [pin, setPin] = useState([-1, -1, -1, -1]);
   const [index, setIndex] = useState(-1);

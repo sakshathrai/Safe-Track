@@ -14,7 +14,16 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
-        <Route exact path="/pin" element={<Password />}></Route>
+        <Route
+          exact
+          path="/setpin"
+          element={<Password endPoint="setuppin" />}
+        ></Route>
+        <Route
+          exact
+          path="/verify"
+          element={<Password endPoint="verifypin" />}
+        ></Route>
         <Route exact path="/pickLevel" element={<LevelPick />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/card-pay" element={<CardPay />}></Route>

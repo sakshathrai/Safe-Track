@@ -59,11 +59,15 @@ function Home() {
         <button onClick={() => navigate("/custom-level")}>Custom Level</button>
         <button>Add Card</button>
         <button>Name</button>
+        <button onClick={() => navigate("/pickLevel")}>Change Level</button>
         <select
           onChange={(e) => {
             setLevel(e.target.value);
           }}
         >
+          <option value="0" disabled selected>
+            levels
+          </option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

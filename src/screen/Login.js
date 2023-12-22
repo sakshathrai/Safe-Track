@@ -27,7 +27,7 @@ function Login() {
 
     if (responseJSON.success) {
       localStorage.setItem("safeToken", responseJSON.authToken);
-      navigate("/home");
+      navigate("/verify");
     } else {
       setErrorMsge(responseJSON.fethError || responseJSON.serverError);
     }
@@ -105,9 +105,6 @@ function Login() {
             Login
           </button>
           <div className="my-form__actions">
-            <Link to="#" title="Reset Password">
-              Reset Password
-            </Link>
             <Link to="/signup" title="Create Account">
               new User?
             </Link>
