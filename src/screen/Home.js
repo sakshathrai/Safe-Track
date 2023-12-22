@@ -12,7 +12,7 @@ function getCustom() {
     return JSON.parse(custom);
   } else {
     return {
-      1: ["num", "recharge", "upi", "acc", "scan"],
+      1: ["Settings", "num", "recharge", "upi", "acc", "scan"],
       2: ["Electricity", "Education", "credit", "water", "cylinder"],
       3: ["Loan-repay", "donate", "postpaid", "Ticket", "Flight"],
     };
@@ -43,6 +43,7 @@ function Home() {
     postpaid: "postpaid",
     Ticket: "Movie ticket",
     flight: "Flight ticket",
+    Settings: "Account Settings",
   };
 
   useEffect(() => {
