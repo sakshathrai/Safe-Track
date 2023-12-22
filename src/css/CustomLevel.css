@@ -1,6 +1,25 @@
 .level-buttons {
   display: flex;
+  gap: 10px;
   position: fixed;
-  right: 10px;
-  bottom: 10px;
+  right: 30px;
+  bottom: 30px;
+}
+
+.levels {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid gray;
+}
+
+.levels.removed {
+  background-color: rgb(185, 218, 135);
+}
+
+.selected-for-add {
+  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }

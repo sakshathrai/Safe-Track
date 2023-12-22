@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import "../css/home.css";
 import { useNavigate } from "react-router-dom";
 function getLevel() {
@@ -8,11 +7,11 @@ function getLevel() {
 function Home() {
   const navigate = useNavigate();
   const [level, setLevel] = useState(getLevel);
-  const services = {
-    1: ["upi", "num", "acc", "recharge", "scan"],
+  const [services, setServices] = useState({
+    1: ["num", "recharge", "upi", "acc", "scan"],
     2: ["Electricity", "Education", "credit", "water", "cylinder"],
     3: ["Loan-repay", "donate", "postpaid", "Ticket", "Flight"],
-  };
+  });
   const [showService, setShowServices] = useState(services[level]);
   const Headings = {
     upi: "Pay by UPI/QR",
@@ -33,8 +32,12 @@ function Home() {
   };
   useEffect(() => {
     setLevel(localStorage.getItem("level"));
+    const customServices = localStorage.getItem("custom");
+    if (customServices) {
+      setServices(JSON.parse(customServices));
+    }
     setShowServices(services[level]);
-  });
+  }, []);
   return (
     <div className="home-container">
       <div className="home-header">
@@ -43,14 +46,22 @@ function Home() {
         <button>Add Card</button>
         <button>Name</button>
       </div>
-      {showService.map((v) => {
-        return (
-          <div className="card" key={v}>
-            <i className="fas fa-qrcode"></i>
-            <h2>{Headings[v]}</h2>
-          </div>
-        );
-      })}
+      <div className="services-container">
+        {showService.map((v) => {
+          const imgPath = `icons/${v}.png`;
+
+          return (
+            <div className="card" key={v}>
+              <img
+                src={imgPath}
+                alt={`Image for ${v}`}
+                className="servic-icon"
+              />
+              <h2>{Headings[v]}</h2>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
