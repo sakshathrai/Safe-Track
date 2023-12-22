@@ -90,10 +90,11 @@ app.post("/api/signup", async (req, res) => {
   const dataForJwtSign = {
     user: {
       id: response._id.toString(),
+      name: req.body.userName,
     },
   };
   const authToken = jwt.sign(dataForJwtSign, JWT_SECRETE);
-  res.send({ authToken, success: true });
+  res.send({ authToken, success: true, userName: req.body.userName });
 });
 
 app.post("/api/login", async (req, res) => {

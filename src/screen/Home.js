@@ -5,18 +5,22 @@ function getLevel() {
   return localStorage.getItem("level");
 }
 function getCustom() {
-  return localStorage.getItem("custom");
+  const custom = localStorage.getItem("custom");
+  if (custom) {
+    console.log(custom);
+    return JSON.parse(custom);
+  } else {
+    return {
+      1: ["num", "recharge", "upi", "acc", "scan"],
+      2: ["Electricity", "Education", "credit", "water", "cylinder"],
+      3: ["Loan-repay", "donate", "postpaid", "Ticket", "Flight"],
+    };
+  }
 }
 function Home() {
   const navigate = useNavigate();
   const [level, setLevel] = useState(getLevel);
-  const [services, setServices] = useState(
-    (getCustom() && JSON.parse(getCustom())) || {
-      1: ["num", "recharge", "upi", "acc", "scan"],
-      2: ["Electricity", "Education", "credit", "water", "cylinder"],
-      3: ["Loan-repay", "donate", "postpaid", "Ticket", "Flight"],
-    }
-  );
+  const [services, setServices] = useState(getCustom);
   const [showService, setShowServices] = useState(services[level]);
   const Headings = {
     upi: "Pay by UPI/QR",
@@ -42,7 +46,6 @@ function Home() {
     if (customServices) {
       setServices(JSON.parse(customServices));
     }
-    console.log(services[level]);
     setShowServices(services[level]);
   }, []);
 
