@@ -39,17 +39,27 @@ function ChatBot({ fc }) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
+        const arr = [];
         data.Actions.forEach((v) => {
           dataSet[1].forEach((val) => {
-            setChateResponse([...chatResponse, val]);
+            if (val == v) {
+              arr.push(val);
+            }
           });
           dataSet[2].forEach((val) => {
-            setChateResponse([...chatResponse, val]);
+            if (val == v) {
+              arr.push(val);
+            }
           });
           dataSet[3].forEach((val) => {
-            setChateResponse([...chatResponse, val]);
+            if (val == v) {
+              arr.push(val);
+            }
           });
         });
+        console.log(arr);
+        setChateResponse([...arr]);
       })
       .catch((error) => {
         console.error("Error:", error);
