@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../css/landing.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../image/logo.png"
+import logo from "../image/logo.jpg";
+
 function Landing() {
 
   return (
@@ -11,7 +12,7 @@ function Landing() {
     <header className="header">
       <nav className="nav">
         <img
-          src="image/logo.png"
+          src={logo}
           alt="Bankist logo"
           className="nav__logo"
           id="logo"
@@ -23,13 +24,12 @@ function Landing() {
           <li className="nav__item">
             <a className="nav__link" href="#section--2">Operations</a>
           </li>
-          <li className="nav__item">
+          {/* <li className="nav__item">
             <a className="nav__link" href="#section--3">Testimonials</a>
-          </li>
+          </li> */}
           <li className="nav__item">
             <a className="nav__link nav__link--btn btn--show-modal" href="#"
-              >Open account</a
-            >
+              >Sign Up</a>
           </li>
         </ul>
       </nav>
