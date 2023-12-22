@@ -46,6 +46,9 @@ function Home() {
     setShowServices(services[level]);
   }, []);
 
+  useEffect(() => {
+    setShowServices(services[level]);
+  }, [level]);
   return (
     <div className="home-container">
       <div className="home-header">
@@ -55,7 +58,6 @@ function Home() {
         <button>Name</button>
         <select
           onChange={(e) => {
-            console.log(level);
             setLevel(e.target.value);
           }}
         >
