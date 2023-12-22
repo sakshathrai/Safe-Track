@@ -5,6 +5,7 @@ import logo from "../image/logo.png"
 function Landing() {
 
   return (
+    
    
   <div>
     <header className="header">

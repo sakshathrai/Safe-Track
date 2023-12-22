@@ -8,6 +8,7 @@ import Home from "./screen/Home";
 import LevelPick from "./screen/LevelPick";
 import CustomLevel from "./screen/CustomLevel";
 import Landing from "./screen/Landing";
+import Debt from "./screen/DebitInfo"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/card-pay" element={<CardPay />} />
       <Route path="/custom-level" element={<CustomLevel />} />
+      <Route path="/deptinfo" element={<Debt/>}/>
     </Routes>
   </BrowserRouter>
   );
