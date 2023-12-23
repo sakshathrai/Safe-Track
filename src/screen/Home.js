@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/home.css";
 import { useNavigate } from "react-router-dom";
-import ChatBot from "../component/Chat";
+import ChatBot from "../component/chat.js";
 function getLevel() {
   return localStorage.getItem("level");
 }
